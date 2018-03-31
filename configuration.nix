@@ -92,7 +92,6 @@
   programs.wireshark.package= pkgs.wireshark-qt;
 
   environment.systemPackages = with pkgs; [
-    kdeApplications.kmix
     kate
     libreoffice
     simplescreenrecorder
@@ -100,7 +99,6 @@
     okular
     gpm
     git
-    atom
     xboxdrv
     bluez5_28    
     tlp
@@ -132,12 +130,9 @@
     traceroute
     truecrypt
     kismet
-    # wireshark
     thc-hydra
 
-    # singularity
-    # kanboard
-
+   
     pidgin
     hexchat
     mySteam
@@ -156,11 +151,7 @@
     neovim
     pciutils
     pinta
-    # oraclejdk
-    # netbeans
-    # maven
-    # android-studio 
-    # mailutils
+    blender
   ];
 
   # List services that you want to enable:
