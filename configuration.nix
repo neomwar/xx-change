@@ -85,10 +85,11 @@
   programs.wireshark.package= pkgs.wireshark-qt;
   
   environment.variables = {
-    SUDO_EDITOR = "kate";
+    SUDO_EDITOR = "atom";
   };
 
   environment.systemPackages = with pkgs; [
+    atom
     kate
     libreoffice
     simplescreenrecorder
