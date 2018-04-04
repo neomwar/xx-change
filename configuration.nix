@@ -46,7 +46,6 @@
 
   # Download broadcom wifi driver
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
-  # boot.blacklistedKernelModules=[ "i915" ];
 
   networking.hostName = "greygoo"; # Define your hostname.
   networking.firewall.enable = true;
@@ -76,12 +75,6 @@
   # Configuration for installed packages with environment.systemPackages
   nixpkgs.config = {
     allowUnfree = true;
-   # firefox = { enableAdobeFlash = true; };
-    chromium = { 
-      # enablePepperFlash = true;
-      # enablePepperPDF = true;
-      # enableWideVine = true; 
-    };
     pulseaudio = true;
   };
 
@@ -90,6 +83,10 @@
   # $ nix-env -qaP | grep wget
   programs.wireshark.enable = true;
   programs.wireshark.package= pkgs.wireshark-qt;
+  
+  environment.variables = {
+    SUDO_EDITOR = "kate";
+  };
 
   environment.systemPackages = with pkgs; [
     kate
@@ -155,7 +152,6 @@
   ];
 
   # List services that you want to enable:
-  # services.teamviewer.enable = true; 
  
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -212,37 +208,6 @@
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.09";
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.dates = "18:00";
-  system.autoUpgrade.channel = https://nixos.org/channels/nixos-unstable;
   
-  # Automatic Nix Store cleanup 
-  nix.gc.automatic = false;
-  # nix.gc.dates = "20:00";
-  services.cron.systemCronJobs = [ "0 19 * * 7 root /etc/admin/optimize-nix" ];
-  environment.etc =
-  {
-    "admin/optimize-nix" =
-    {
-      text =
-      ''
-        #!/run/current-system/sw/bin/bash
-        set -eu
-
-        # Delete everything from this profile that isn't currently needed
-        nix-env --delete-generations old
-
-        # Delete generations older than a week
-        nix-collect-garbage
-        nix-collect-garbage --delete-older-than 7d
-
-        # Optimize
-        nix-store --gc --print-dead
-        nix-store --optimise
-
-      '';
-      mode = "0774";
-    };
-  };
 
 }
