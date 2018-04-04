@@ -75,7 +75,6 @@
   # Configuration for installed packages with environment.systemPackages
   nixpkgs.config = {
     allowUnfree = true;
-    pulseaudio = true;
   };
 
   nixpkgs.overlays = [ (self: super: { mySteam = super.steamPackages.steam-chrootenv.override { withPrimus = true; }; } ) ];
@@ -167,8 +166,6 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
 
   hardware.opengl.driSupport32Bit = true;
   hardware.bluetooth.enable = true;
