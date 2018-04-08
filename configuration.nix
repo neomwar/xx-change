@@ -77,11 +77,22 @@
   programs.wireshark.enable = true;
   programs.wireshark.package= pkgs.wireshark-qt;
 
+  # Set environment variables
   environment.variables = {
-    SUDO_EDITOR = "atom";
+    EDITOR = "atom";
+    SUDO_EDITOR = "vim";
+    SHELL = "${pkgs.fish}/bin/fish";
+  };
+
+  # Set shell aliases
+  environment.shellAliases = {
+    la = "ls --almost-all --human-readable";
+    ll = "ls -lh";
   };
 
   environment.systemPackages = with pkgs; [
+    fish # Friendly Interactive SHell
+    pavucontrol # Pulse Audio VolUme CONTROL
     atom
     kate
     libreoffice
@@ -176,6 +187,7 @@
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.defaultUserShell = "/run/current-system/sw/bin/fish";
   users.extraUsers.master = {
     isNormalUser = true;
     uid = 1000;
