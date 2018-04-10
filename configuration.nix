@@ -69,9 +69,9 @@
   nixpkgs.config = {
     allowUnfree = true;
     pulseaudio = true;
+    steam.primus = true;
   };
 
-  nixpkgs.overlays = [ (self: super: { mySteam = super.steamPackages.steam-chrootenv.override { withPrimus = true; }; } ) ];
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   programs.wireshark.enable = true;
@@ -93,6 +93,8 @@
     nixb = "sudo nixos-rebuild switch";
     gitp = "sudo git push -u origin master";
     atoma = "sudo atom configuration.nix";
+    vim = "nvim";
+    vi = "nvim";
   };
 
   environment.systemPackages = with pkgs; [
@@ -141,7 +143,7 @@
 
     pidgin
     hexchat
-    mySteam
+    steam
     glxinfo
     shutter
     smplayer
@@ -188,6 +190,11 @@
   hardware.cpu.intel.updateMicrocode = true;
   hardware.opengl.extraPackages = with pkgs; [ vaapiIntel ];
   services.xserver.videoDrivers = [ "nvidia intel" ];
+  services.xserver.deviceSection = ''
+        # Tearing fix for Intel integrated GPU
+				Driver      "intel"
+				Option      "TearFree"    "true"
+			'';
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
