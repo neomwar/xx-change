@@ -80,7 +80,7 @@
   # Set environment variables
   environment.variables = {
     EDITOR = "atom";
-    SUDO_EDITOR = "vim";
+    SUDO_EDITOR = "nvim";
     SHELL = "${pkgs.fish}/bin/fish";
   };
 
@@ -88,11 +88,15 @@
   environment.shellAliases = {
     la = "ls --almost-all --human-readable";
     ll = "ls -lh";
+    nixg = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
+    nixc = "cd /etc/nixos";
+    nixb = "sudo nixos-rebuild switch";
+    gitp = "sudo git push -u origin master";
+    atoma = "sudo atom configuration.nix";
   };
 
   environment.systemPackages = with pkgs; [
     fish # Friendly Interactive SHell
-    pavucontrol # Pulse Audio VolUme CONTROL
     atom
     kate
     libreoffice
@@ -150,7 +154,7 @@
     google-chrome
     gpicview
     gimp
-    vim
+    neovim
     pciutils
     pinta
     blender
