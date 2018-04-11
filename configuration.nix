@@ -90,14 +90,12 @@
     ll = "ls -lh";
     nixg = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
     nixc = "cd /etc/nixos";
-    nixb = "sudo nixos-rebuild switch";
-    gitp = "sudo git push -u origin master";
-    atoma = "sudo atom configuration.nix";
-    vim = "nvim";
-    vi = "nvim";
+    hello = "echo hello";
   };
 
   environment.systemPackages = with pkgs; [
+    gns3-gui # Graphical Network Simulator 3 GUI
+    gns3-server
     fish # Friendly Interactive SHell
     atom
     kate
