@@ -88,12 +88,10 @@
   environment.shellAliases = {
     la = "ls --almost-all --human-readable";
     ll = "ls -lh";
-    nixg = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
-    nixc = "cd /etc/nixos";
-    hello = "echo hello";
   };
 
   environment.systemPackages = with pkgs; [
+    krita
     gns3-gui # Graphical Network Simulator 3 GUI
     gns3-server
     fish # Friendly Interactive SHell
