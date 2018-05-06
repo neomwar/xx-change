@@ -104,7 +104,6 @@
     gpm
     git
     xboxdrv
-    bluez5_28
     tlp
     go-sct
 
@@ -174,6 +173,7 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
+  hardware.enableAllFirmware = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.support32Bit = true;
 
