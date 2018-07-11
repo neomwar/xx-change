@@ -69,8 +69,9 @@
   nixpkgs.config = {
     allowUnfree = true;
     pulseaudio = true;
-    steam.primus = true;
+    #steam.primus = true;
   };
+  nixpkgs.overlays = [ (self: super: { mySteam = super.steamPackages.steam-chrootenv.override { withPrimus = true; }; } ) ];
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -91,6 +92,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    tor-browser-bundle-bin
     krita
     gns3-gui # Graphical Network Simulator 3 GUI
     gns3-server
@@ -138,7 +140,8 @@
 
     pidgin
     hexchat
-    steam
+    #steam
+    mySteam
     glxinfo
     shutter
     smplayer
@@ -168,6 +171,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us";
+  services.xserver.libinput.enable = true;
 
   # Enable the Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -186,12 +190,6 @@
   hardware.cpu.intel.updateMicrocode = true;
   hardware.opengl.extraPackages = with pkgs; [ vaapiIntel ];
   services.xserver.videoDrivers = [ "nvidia intel" ];
-  services.xserver.deviceSection = ''
-        # Tearing fix for Intel integrated GPU
-				Driver      "intel"
-				Option      "TearFree"    "true"
-			'';
-
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.defaultUserShell = "/run/current-system/sw/bin/fish";
@@ -220,7 +218,7 @@
   services.nixosManual.showManual = true;
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "18.03";
+  system.nixos.stateVersion = "18.03";
 
 
 }
