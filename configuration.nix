@@ -61,7 +61,7 @@
   time.timeZone = "Europe/Athens";
 
   # VirtualBox
-  virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "master" ];
   boot.initrd.checkJournalingFS = false;
 
@@ -92,10 +92,14 @@
   };
 
   environment.systemPackages = with pkgs; [
+    volatility
+    scanmem
+    redshift-plasma-applet
+    android-file-transfer
+    sdlmame
+    wine
     tor-browser-bundle-bin
     krita
-    gns3-gui # Graphical Network Simulator 3 GUI
-    gns3-server
     fish # Friendly Interactive SHell
     atom
     kate
@@ -143,7 +147,7 @@
     #steam
     mySteam
     glxinfo
-    shutter
+    flameshot
     smplayer
     mpv
     ntfs3g
@@ -218,7 +222,7 @@
   services.nixosManual.showManual = true;
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.nixos.stateVersion = "18.03";
+  system.stateVersion = "19.03";
 
 
 }
